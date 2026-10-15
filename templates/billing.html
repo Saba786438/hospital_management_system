@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Billing & Payments</h1>
+
+<div class="panel">
+    <h2>Create New Bill</h2>
+
+    <form method="POST">
+        <label>Patient</label>
+        <select name="patient_id" required>
+            <option value="">Select Patient</option>
+            {% for p in patients %}
+            <option value="{{ p.id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Description</label>
+        <input name="description"
+               placeholder="Consultation or tests" required>
+
+        <label>Amount (₹)</label>
+        <input name="amount" type="number"
+               min="0.01" step="0.01" required>
+
+        <button type="submit">Create Bill</button>
+    </form>
+</div>
+
+<h2>Billing Records</h2>
+
+<table>
+    <tr>
+        <th>Bill ID</th>
+        <th>Patient</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Status</th>
+    </tr>
+
+    {% for b in bills %}
+    <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.patient }}</td>
+        <td>{{ b.description }}</td>
+        <td>₹{{ "%.2f"|format(b.amount) }}</td>
+        <td>{{ b.status }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No bills available.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hospital Dashboard</h1>
+<p>Welcome to the Hospital Management System.</p>
+
+<div class="stats">
+    <div class="stat-card">
+        <h3>Total Patients</h3>
+        <h2>{{ patients|length }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Doctors</h3>
+        <h2>{{ doctors|length }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Appointments</h3>
+        <h2>{{ appointments|length }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Bills</h3>
+        <h2>{{ bills|length }}</h2>
+    </div>
+</div>
+
+<h2>Quick Actions</h2>
+
+<div class="quick-links">
+    <a href="/patients">＋ Register Patient</a>
+    <a href="/doctors">＋ Add Doctor</a>
+    <a href="/appointments">＋ Book Appointment</a>
+    <a href="/billing">＋ Create Bill</a>
+</div>
+
+<h2>Recent Appointments</h2>
+
+<table>
+    <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+    </tr>
+
+    {% for a in appointments %}
+    <tr>
+        <td>{{ a.patient }}</td>
+        <td>{{ a.doctor }}</td>
+        <td>{{ a.date }}</td>
+        <td>{{ a.time }}</td>
+        <td>{{ a.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

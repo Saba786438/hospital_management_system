@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Global Search</h1>
+
+<div class="panel">
+    <form method="GET" class="search-form">
+        <input name="q" value="{{ q }}"
+               placeholder="Search patients or doctors">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{% if q %}
+<h2>Patient Results</h2>
+<table>
+    <tr><th>Name</th><th>Phone</th><th>Age</th></tr>
+    {% for p in results.patients %}
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.age }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3">No matching patients.</td></tr>
+    {% endfor %}
+</table>
+
+<h2>Doctor Results</h2>
+<table>
+    <tr><th>Name</th><th>Specialty</th></tr>
+    {% for d in results.doctors %}
+    <tr>
+        <td>{{ d.name }}</td>
+        <td>{{ d.specialty }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="2">No matching doctors.</td></tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

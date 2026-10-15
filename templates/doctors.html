@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Doctor Management</h1>
+
+<div class="panel">
+    <h2>Add Doctor</h2>
+
+    <form method="POST">
+        <input name="name" placeholder="Doctor Name" required>
+
+        <select name="specialty" required>
+            <option value="">Select Specialty</option>
+            <option>Cardiology</option>
+            <option>Neurology</option>
+            <option>Pediatrics</option>
+            <option>Orthopedics</option>
+            <option>General Medicine</option>
+        </select>
+
+        <button type="submit">Add Doctor</button>
+    </form>
+</div>
+
+<h2>Doctor Directory</h2>
+
+<form method="GET" class="search-form">
+    <input name="q" placeholder="Search doctors">
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Doctor Name</th>
+        <th>Specialty</th>
+    </tr>
+
+    {% for d in doctors %}
+    <tr>
+        <td>{{ d.id }}</td>
+        <td>{{ d.name }}</td>
+        <td>{{ d.specialty }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3">No doctors found.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
